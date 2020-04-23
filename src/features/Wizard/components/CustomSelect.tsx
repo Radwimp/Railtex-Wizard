@@ -27,12 +27,11 @@ export default function CustomSelect(props: CustomSelectProps) {
       >
         <Select
           value={props.value}
-          onChange={(e: any) => props.onChange(e.target.value)}
+          onChange={(e) => props.onChange(e.target.value)}
         >
           {props.options.map(option => <MenuItem key={option} value={option}>{option}</MenuItem>)}
         </Select>
       </FormControl>
     </div>
-
   )
 }

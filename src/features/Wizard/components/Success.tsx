@@ -1,6 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { Box, Typography } from '@material-ui/core';
 
 export default function Success() {
   return (

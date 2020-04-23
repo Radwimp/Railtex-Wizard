@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import {
   Box,
   Button,
+  createStyles,
+  makeStyles,
   Step,
   Stepper,
   StepConnector,
   StepLabel,
+  StepIconProps,
+  Theme,
+  withStyles
 } from '@material-ui/core';
-import { StepIconProps } from '@material-ui/core/StepIcon';
-import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 import Check from '@material-ui/icons/Check';
 import bg from '../../images/wizard-bg.jpg';
 import Contacts from './components/Contacts';
@@ -122,15 +125,16 @@ function getSteps() {
 export default function Wizard() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [contacts, setContacts] = React.useState(initialUserState.contacts);
-  const [address, setAddress] = React.useState(initialUserState.address);
-  const [categories, setCategories] = React.useState(initialUserState.categories);
+  const [activeStep, setActiveStep] = useState(0);
+  const [contacts, setContacts] = useState(initialUserState.contacts);
+  const [address, setAddress] = useState(initialUserState.address);
+  const [categories, setCategories] = useState(initialUserState.categories);
+  const [nextButtonEnabled, setNextButtonEnabled] = useState(false);
   const steps = getSteps();
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <Contacts contacts={contacts} setContacts={setContacts}/>;
+        return <Contacts contacts={contacts} setContacts={setContacts} nextButtonEnabled={nextButtonEnabled} enableNextButton={setNextButtonEnabled}/>;
       case 1:
         return <Address address={address} setAddress={setAddress}/>;
       case 2:
@@ -210,6 +214,7 @@ export default function Wizard() {
                 color="primary"
                 onClick={handleNext}
                 className={classes.button}
+                disabled={!nextButtonEnabled}
               >
                 {activeStep === steps.length - 2 ? 'Finish' : 'Next'}
               </Button>

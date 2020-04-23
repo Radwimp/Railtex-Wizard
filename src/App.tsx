@@ -1,6 +1,6 @@
 import React from 'react';
-import Wizard from './features/Wizard/Wizard';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Wizard from './features/Wizard/Wizard';
 import './App.css';
 
 const theme = createMuiTheme({

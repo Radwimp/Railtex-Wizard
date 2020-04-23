@@ -5,9 +5,10 @@ import Typography from '@material-ui/core/Typography';
 interface CustomInputProps {
   label: string,
   value: string,
-  onChange: any,
+  onChange: Function,
   type?: string,
   error?: boolean,
+  helperText?: string,
 }
 
 export default function CustomInput(props: CustomInputProps) {
@@ -19,19 +20,19 @@ export default function CustomInput(props: CustomInputProps) {
       >
         {props.label}
       </Typography>
-      <TextField
-        required
-        fullWidth
-        value={props.value}
-        type={props.type}
-        error={props.error}
-        onChange={(e: any) => props.onChange(e.target.value)}
-        margin="dense"
-        size="small"
-        id="outlined-required"
-        variant="outlined"
-      />
+      <form noValidate>
+        <TextField
+          fullWidth
+          value={props.value}
+          type={props.type}
+          error={props.error}
+          helperText={props.helperText}
+          onChange={(e) => props.onChange(e.target.value)}
+          margin="dense"
+          size="small"
+          variant="outlined"
+        />
+      </form>
     </div>
-
   )
 }
